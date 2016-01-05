@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        mUsernameView = (AutoCompleteTextView) findViewById(R.id.email);
+        mUsernameView = (AutoCompleteTextView) findViewById(R.id.username);
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -50,8 +50,6 @@ public class LoginActivity extends AppCompatActivity{
         mSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mSignInButton.setOnClickListener(onLoginClickListener);
 
-        //presenter = new LoginPresenter(this, new LoginService());
-        
         loginService = new LoginService();
     }
     
@@ -71,7 +69,7 @@ public class LoginActivity extends AppCompatActivity{
     private void attemptLogin() {
         String username = mUsernameView.getText().toString();
         if(username.isEmpty()){
-            mUsernameView.setError(getString(R.string.error_email_empty));
+            mUsernameView.setError(getString(R.string.error_username_empty));
             return;
         }
 
@@ -88,17 +86,8 @@ public class LoginActivity extends AppCompatActivity{
         }else{
             Toast.makeText(getApplicationContext(), R.string.message_username_password_incorrect, Toast.LENGTH_SHORT).show();
         }
-        //presenter.onLoginClicked();
     }
 
-   /* @Override
-    public String getUsername() {
-        return mUsernameView.getText().toString();
-    }
 
-    @Override
-    public void showUsernameError(int resId) {
-        mUsernameView.setError(getString(resId));
-    }*/
 }
 
