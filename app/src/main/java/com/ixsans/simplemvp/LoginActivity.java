@@ -18,7 +18,7 @@ import com.ixsans.simplemvp.home.HomeActivity;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoginView {
+public class LoginActivity extends AppCompatActivity{
 
 
     // UI references.
@@ -26,8 +26,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     private EditText mPasswordView;
     private Button mSignInButton;
 
-    private LoginPresenter presenter;
-    
     LoginService loginService;
 
     @Override
@@ -52,7 +50,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         mSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mSignInButton.setOnClickListener(onLoginClickListener);
 
-        presenter = new LoginPresenter(this, new LoginService());
+        //presenter = new LoginPresenter(this, new LoginService());
         
         loginService = new LoginService();
     }
@@ -93,7 +91,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         //presenter.onLoginClicked();
     }
 
-    @Override
+   /* @Override
     public String getUsername() {
         return mUsernameView.getText().toString();
     }
@@ -101,6 +99,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     public void showUsernameError(int resId) {
         mUsernameView.setError(getString(resId));
-    }
+    }*/
 }
 
