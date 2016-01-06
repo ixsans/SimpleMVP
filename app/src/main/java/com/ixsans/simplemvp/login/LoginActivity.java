@@ -1,4 +1,4 @@
-package com.ixsans.simplemvp;
+package com.ixsans.simplemvp.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,10 +13,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ixsans.simplemvp.R;
+import com.ixsans.simplemvp.home.HomeActivity;
+
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends AppCompatActivity implements LoginContract.View{
 
 
     // UI references.
@@ -24,7 +27,7 @@ public class LoginActivity extends AppCompatActivity{
     private EditText mPasswordView;
     private Button mSignInButton;
 
-    LoginService loginService;
+    private LoginPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,7 @@ public class LoginActivity extends AppCompatActivity{
         mSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mSignInButton.setOnClickListener(onLoginClickListener);
 
-        loginService = new LoginService();
+        mPresenter = new LoginPresenter(this, new LoginService());
     }
     
 
@@ -60,27 +63,39 @@ public class LoginActivity extends AppCompatActivity{
     };
 
     private void attemptLogin() {
-        String username = mUsernameView.getText().toString();
-        if(username.isEmpty()){
-            mUsernameView.setError(getString(R.string.error_username_empty));
-            return;
-        }
-
-        String password = mPasswordView.getText().toString();
-        if(password.isEmpty()){
-            mPasswordView.setError(getString(R.string.error_password_empty));
-            return;
-        }
-        
-        if(loginService.authenticate(username, password)){
-            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-            startActivity(intent);
-            finish();
-        }else{
-            Toast.makeText(getApplicationContext(), R.string.message_username_password_incorrect, Toast.LENGTH_SHORT).show();
-        }
+        mPresenter.onLoginClicked();
     }
 
 
+    @Override
+    public String getUsername() {
+        return mUsernameView.getText().toString();
+    }
+
+    @Override
+    public void showUsernameEmptyError(int resId) {
+        mUsernameView.setError(getString(resId));
+    }
+
+    @Override
+    public String getPassword() {
+        return mPasswordView.getText().toString();
+    }
+
+    @Override
+    public void showPasswordEmptyError(int resId) {
+        mPasswordView.setError(getString(resId));
+    }
+
+    @Override
+    public void showWrongCredentialMessage(int resId) {
+        Toast.makeText(getApplicationContext(), getString(resId), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onLoginSuccess() {
+        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+        finish();
+    }
 }
 

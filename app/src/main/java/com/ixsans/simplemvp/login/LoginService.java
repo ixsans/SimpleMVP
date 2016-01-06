@@ -1,4 +1,4 @@
-package com.ixsans.simplemvp;
+package com.ixsans.simplemvp.login;
 
 /**
  *
