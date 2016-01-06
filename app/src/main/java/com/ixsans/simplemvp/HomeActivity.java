@@ -1,10 +1,8 @@
-package com.ixsans.simplemvp.home;
+package com.ixsans.simplemvp;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-
-import com.ixsans.simplemvp.R;
 
 public class HomeActivity extends AppCompatActivity {
 
