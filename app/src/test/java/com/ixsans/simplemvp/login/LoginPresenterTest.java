@@ -9,7 +9,7 @@ import org.mockito.Mockito;
 /**
  * Originally written by Author Name ikhsanudinhakim, 1/6/16
  */
-public class LoginPresenterTest {
+public class  LoginPresenterTest {
 
     private LoginPresenter mPresenter;
     private LoginContract.View view;
@@ -40,7 +40,7 @@ public class LoginPresenterTest {
     @Test
     public void shouldShowErrorWhenPasswordEmpty() throws Exception {
         Mockito.when(view.getUsername()).thenReturn("ixsans");
-        Mockito.when(view.getPassword()).thenReturn("");
+        Mockito.when(view.getPassword()).thenReturn("n");
         mPresenter.onLoginClicked();
 
         Mockito.verify(view).showPasswordEmptyError(R.string.error_password_empty);
