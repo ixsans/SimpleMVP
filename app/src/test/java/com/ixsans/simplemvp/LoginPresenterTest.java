@@ -31,7 +31,7 @@ public class LoginPresenterTest {
 
     @Test
     public void shouldShowErrorWhenUsernameEmpty() throws Exception {
-        when(view.getUsername()).thenReturn("");
+        when(view.getUsername()).thenReturn("xx");
         presenter.onLoginClicked();
 
         verify(view).showUsernameError(R.string.error_field_required);
